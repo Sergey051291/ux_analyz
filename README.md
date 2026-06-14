@@ -1,84 +1,84 @@
-# UX Analyz — AI-Powered Website UX Audit
+# UX Analyz — AI-анализ UX веб-сайтов
 
-**Streamlit application for automated UX analysis of websites using LLM (Ollama or GigaChat), Selenium screenshots, and PowerPoint report generation.**
+**Streamlit-приложение для автоматизированного UX-анализа сайтов с помощью LLM (Ollama или GigaChat), скриншотов через Selenium и генерации отчета в PowerPoint.**
 
-Enter a URL, capture page screenshots, run AI-driven UX evaluation against a structured prompt, and export findings as a `.pptx` presentation.
+Введите URL, получите скриншоты страниц, запустите AI-оценку UX по структурированному промпту и экспортируйте результаты в презентацию `.pptx`.
 
 ---
 
-## Screenshots
+## Скриншоты
 
-> Add screenshots to `docs/screenshots/` and uncomment the lines below.
+> Добавьте скриншоты в `docs/screenshots/` и раскомментируйте строки ниже.
 
 <!--
-![Main UI](docs/screenshots/01-main.png)
-![Analysis result](docs/screenshots/02-analysis.png)
-![PPTX export](docs/screenshots/03-pptx.png)
+![Главный экран](docs/screenshots/01-main.png)
+![Результат анализа](docs/screenshots/02-analysis.png)
+![Экспорт PPTX](docs/screenshots/03-pptx.png)
 -->
 
 ---
 
-## Features
+## Функциональность
 
-| Feature | Description |
-|---------|-------------|
-| **Multi-page crawl** | Analyze up to N linked pages from a starting URL |
-| **Screenshot capture** | Automated browser screenshots via Selenium + Chrome |
-| **LLM analysis** | UX evaluation using Ollama (local) or GigaChat (cloud) |
-| **Structured prompt** | Configurable analysis template (`ux_prompt.txt`) |
-| **PPTX export** | Generate PowerPoint report with screenshots and findings |
-| **Analysis modes** | Basic, Extended, Full (configurable) |
+| Функция | Описание |
+|---------|----------|
+| **Обход страниц** | Анализ до N связанных страниц от стартового URL |
+| **Скриншоты** | Автоматический захват экрана через Selenium + Chrome |
+| **LLM-анализ** | UX-оценка через Ollama (локально) или GigaChat (облако) |
+| **Структурированный промпт** | Настраиваемый шаблон анализа (`ux_prompt.txt`) |
+| **Экспорт PPTX** | Генерация презентации со скриншотами и выводами |
+| **Режимы анализа** | Базовый, расширенный, полный (настраивается) |
 
 ---
 
-## Tech Stack
+## Стек технологий
 
-| Layer | Technologies |
-|-------|-------------|
-| **UI** | Streamlit |
-| **Browser automation** | Selenium + Chrome |
+| Слой | Технологии |
+|------|------------|
+| **Интерфейс** | Streamlit |
+| **Автоматизация браузера** | Selenium + Chrome |
 | **LLM** | Ollama (llama3) / GigaChat API |
-| **Report generation** | python-pptx |
-| **Config** | YAML (`config.yaml`) |
-| **HTTP parsing** | requests, BeautifulSoup |
+| **Генерация отчетов** | python-pptx |
+| **Конфигурация** | YAML (`config.yaml`) |
+| **Парсинг HTML** | requests, BeautifulSoup |
 
 ---
 
-## Architecture
+## Архитектура
 
 ```
-User URL input (Streamlit)
+Ввод URL (Streamlit)
         │
         ▼
 ┌───────────────────┐
-│  Selenium         │  Capture screenshots of pages
+│  Selenium         │  Скриншоты страниц
 │  (Chrome)         │
 └─────────┬─────────┘
           │
           ▼
 ┌───────────────────┐     ┌──────────────────┐
-│  HTML extraction  │────▶│  LLM (Ollama /   │
+│  Извлечение HTML  │────▶│  LLM (Ollama /   │
 │  + ux_prompt.txt  │     │  GigaChat)       │
 └─────────┬─────────┘     └──────────────────┘
           │
           ▼
 ┌───────────────────┐
-│  PPTX report      │  Slides with screenshots + UX findings
+│  Отчет PPTX       │  Слайды со скриншотами и выводами
 └───────────────────┘
 ```
 
 ---
 
-## Quick Start
+## Быстрый старт
 
-### Prerequisites
+### Требования
 
 - Python 3.10+
-- [Ollama](https://ollama.com/) running locally (`ollama serve`)
-- Model: `ollama pull llama3`
-- Google Chrome / Chromium installed
+- [Ollama](https://ollama.com/) запущен локально (`ollama serve`)
+- Модель: `ollama pull llama3`
+- Установлен Google Chrome / Chromium
 
-### Installation
+### Установка
 
 ```powershell
 git clone https://github.com/Sergey051291/ux_analyz.git
@@ -90,9 +90,9 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Configuration
+### Настройка
 
-Edit `config.yaml`:
+Отредактируйте `config.yaml`:
 
 ```yaml
 llm:
@@ -104,49 +104,49 @@ llm:
 prompt_template_path: "ux_prompt.txt"
 ```
 
-For GigaChat, set `provider: "gigachat"` and configure credentials in `ux_analyz.py`.
+Для GigaChat укажите `provider: "gigachat"` и настройте credentials в `ux_analyz.py`.
 
-### Run
+### Запуск
 
-Terminal 1:
+Терминал 1:
 ```powershell
 ollama serve
 ```
 
-Terminal 2:
+Терминал 2:
 ```powershell
 streamlit run ux_analyz.py
 ```
 
-Open `http://localhost:8501`, enter a URL, and start analysis.
+Откройте `http://localhost:8501`, введите URL и запустите анализ.
 
 ---
 
-## Project Structure
+## Структура проекта
 
 ```
 ux_analyz/
-├── ux_analyz.py       # Main Streamlit application
-├── ux_prompt.txt      # LLM prompt template for UX analysis
-├── config.yaml        # Runtime configuration
+├── ux_analyz.py       # Основное Streamlit-приложение
+├── ux_prompt.txt      # Шаблон промпта для UX-анализа
+├── config.yaml        # Конфигурация
 ├── requirements.txt
 └── docs/screenshots/
 ```
 
 ---
 
-## Configuration Options
+## Параметры конфигурации
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `max_pages` | 5 | Maximum pages to analyze per run |
-| `max_html_length` | 15000 | HTML truncation limit for LLM |
-| `analysis_modes` | Basic / Extended / Full | Analysis depth levels |
+| Параметр | По умолчанию | Описание |
+|----------|--------------|----------|
+| `max_pages` | 5 | Максимум страниц за один запуск |
+| `max_html_length` | 15000 | Ограничение длины HTML для LLM |
+| `analysis_modes` | Базовый / Расширенный / Полный | Уровни глубины анализа |
 
 ---
 
-## Author
+## Автор
 
-Personal project — automated UX audit tool with local LLM integration.
+Личный проект — инструмент автоматизированного UX-аудита с локальной LLM.
 
-**Stack:** Python · Streamlit · Selenium · Ollama · python-pptx
+**Стек:** Python · Streamlit · Selenium · Ollama · python-pptx
