@@ -1,0 +1,8 @@
+﻿llm:
+  provider: "ollama"
+  
+  ollama:
+    base_url: "http://localhost:11434"
+    model: "llama3"
+
+prompt_template_path: "ux_prompt.txt"

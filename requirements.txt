@@ -1,0 +1,21 @@
+﻿# --- Web UI ---
+streamlit>=1.32,<2
+
+# --- Скриншоты/браузер ---
+selenium>=4.11,<5           # Selenium Manager с 4.6+
+webdriver-manager>=4.0.1,<5  # Резерв на случай, если Selenium Manager не сработает
+
+# --- HTTP/утилиты (твои пакеты + нужны приложению) ---
+requests>=2.31.0,<3
+beautifulsoup4>=4.12.0,<5
+pyyaml>=6.0,<7
+
+# --- PowerPoint ---
+python-pptx>=0.6.21,<1
+pillow>=9.5,<11              # зависимости python-pptx
+lxml>=4.9,<6
+
+# --- LLM клиенты ---
+ollama>=0.2.0,<1             # если используешь локальный Ollama (иначе можно убрать)
+
+
